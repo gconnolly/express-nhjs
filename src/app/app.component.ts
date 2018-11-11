@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColorService } from './color.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'express-nhjs';
+  color = 'red';
+
+  constructor(private colorService: ColorService) { 
+    colorService
+      .getColor()
+      .toPromise()
+      .then(
+        newColor => this.color = newColor as string,
+        console.error
+      )
+  }
 }
